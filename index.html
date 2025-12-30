@@ -78,6 +78,60 @@
           Grant Access
         </button>
       </div>
+
+      <!-- Loading -->
+      <div
+        class="loadingContainer hidden mt-5 text-white flex-col items-center"
+      >
+        <img src="./images/loading.gif" class="w-20" />
+        <p class="text-sm">Loading...</p>
+      </div>
+
+      <!-- Error -->
+      <div
+        class="errorContainer hidden mt-4 bg-red-500/90 text-white px-4 py-2 rounded flex-col items-center"
+      >
+        <img src="./images/not-found.png" class="w-24 mb-1" />
+        <p data-errorText class="text-sm"></p>
+      </div>
+
+      <!-- Current Weather -->
+      <div
+        class="userInfoContainer hidden mt-4 flex-col items-center gap-1 text-white"
+      >
+        <div class="flex items-center justify-evenly">
+          <p data-cityName class="text-lg font-semibold"></p>
+          <p data-weatherDesc class="capitalize text-sm"></p>
+          <img data-weatherIcon class="w-14" />
+        </div>
+
+        <!-- TEMPERATURE & TOGGLE BUTTON  -->
+        <div class="flex justify-center gap-2 px-4 py-2 rounded-lg">
+          <p data-temp class="text-2xl font-bold"></p>
+          <button
+            data-toggleTemp
+            class="bg-black/70 text-white text-xs px-2 py-1 rounded"
+          >
+            °F
+          </button>
+        </div>
+
+        <div class="flex gap-3 mt-3 text-xs">
+          <div class="bg-white/80 p-2 rounded text-black text-center w-24">
+            <img src="./images/temp.png" class="w-6 mx-auto" />
+            <p data-tempCard class="font-semibold"></p>
+          </div>
+
+          <div class="bg-white/80 p-2 rounded text-black text-center w-24">
+            <img src="./images/wind.png" class="w-6 mx-auto" />
+            <p data-windspeed></p>
+          </div>
+          <div class="bg-white/80 p-2 rounded text-black text-center w-24">
+            <img src="./images/humidity.png" class="w-6 mx-auto" />
+            <p data-humidity></p>
+          </div>
+        </div>
+      </div>
     <script src="./script.js"></script>
   </body>
 </html>
