@@ -38,5 +38,33 @@ Weather data is fetched using latitude & longitude for accurate location-based r
 3. Open `index.html` in any browser
 4. Allow location access to view current/your weather
 
+## Folder Structure
 
+weather-app/
+│
+├── index.html
+├── input.css
+├── output.css
+├── README.md
+├── script.js
+├── images/
+│   ├── bgpic.jpg
+│   ├── cloudy.jpg
+│   ├── favicon.png
+│   ├── humidity.png
+│   ├── loading.gif
+│   ├── location.png
+│   ├── not-found.png
+│   ├── rainy.png
+│   ├── search.png
+│   ├── snow.png
+│   ├── sunny.png
+│   ├── temp.png
+│   └── wind.png
+
+
+## Version Control
+
+- Git used for version control
+- Multiple meaningful commits were made for HTML, JavaScript, and README files etc.
 
