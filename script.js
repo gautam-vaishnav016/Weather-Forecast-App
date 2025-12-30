@@ -52,7 +52,88 @@ searchTab.onclick = () => {
   grantContainer.classList.add("hidden");
 };
 
+/* ================= SEARCH ================= */
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!searchInput.value) return;
+  fetchByCity(searchInput.value);
+  searchInput.value = "";
+  recentList.classList.add("hidden");
+});
 
+/* ================= RECENT 5-CITIES================= */
+searchInput.addEventListener("focus", showRecentCities);
+searchInput.addEventListener("mouseenter", showRecentCities);
+
+searchForm.addEventListener("mouseleave", () => {
+  recentList.classList.add("hidden");
+});
+
+function showRecentCities() {
+  const cities = JSON.parse(localStorage.getItem("cities")) || [];
+  if (!cities.length) return;
+
+  recentList.innerHTML = "";
+  recentList.classList.remove("hidden");
+
+  cities.forEach((city) => {
+    const div = document.createElement("div");
+    div.innerText = city;
+    div.className =
+      "px-3 py-2 cursor-pointer border-b last:border-none hover:bg-blue-100";
+
+    div.onclick = () => {
+      fetchByCity(city);
+      recentList.classList.add("hidden");
+    };
+
+    recentList.appendChild(div);
+  });
+}
+
+function saveRecentCity(city) {
+  let cities = JSON.parse(localStorage.getItem("cities")) || [];
+  cities = cities.filter((c) => c.toLowerCase() !== city.toLowerCase());
+  cities.unshift(city);
+  localStorage.setItem("cities", JSON.stringify(cities.slice(0, 5)));
+}
+
+/* ================= LOCATION ================= */
+grantBtn.onclick = () => {
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const { latitude, longitude } = pos.coords;
+
+      sessionStorage.setItem("locationGranted", "true");
+
+      grantContainer.classList.add("hidden");
+      fetchByCoords(latitude, longitude);
+    },
+    () => showError("Location permission denied")
+  );
+};
+
+function checkPermission() {
+  const granted = sessionStorage.getItem("locationGranted");
+
+  errorBox.classList.add("hidden");
+  userInfo.classList.add("hidden");
+  forecastSection.classList.add("hidden");
+
+  if (granted) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        fetchByCoords(latitude, longitude);
+      },
+      () => {
+        grantContainer.classList.remove("hidden");
+      }
+    );
+  } else {
+    grantContainer.classList.remove("hidden");
+  }
+}
 
 /* ================= API ================= */
 const API_KEY = "168771779c71f3d64106d8a88376808a";
